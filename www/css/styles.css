@@ -58,3 +58,23 @@
     height: 15;
 }
 
+.image-div {
+
+    height: 40vh;
+    width: 100%;
+    background-color: cyan;
+}
+
+.text-black {
+    color: black;
+}
+
+.demo-card-header-pic .card-header {
+    height: 40vw;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  .demo-card-header-pic .card-content-padding .date{
+    color: #8e8e93;
+  }
