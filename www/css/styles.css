@@ -27,6 +27,11 @@
     
 }
 
+.icon-google {
+    width: 11vw;
+    height: 11vw;
+}
+
 #parteInferior {
     background-color: white;
 }
@@ -75,6 +80,6 @@
     background-position: center;
     color: #fff;
   }
-  .demo-card-header-pic .card-content-padding .date{
+.demo-card-header-pic .card-content-padding .date{
     color: #8e8e93;
   }
