@@ -41,6 +41,8 @@ $$(document).on('page:init', function (e) {
 
   console.log(e)
 
+  var provider = new firebase.auth.GoogleAuthProvider();
+
   
 
 })
