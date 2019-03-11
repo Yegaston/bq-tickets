@@ -53,22 +53,23 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   console.log(e);
 
   for (var i = 0; i < 3; i++) {
-    $$('#feed-container').append(`
-  <div class="card demo-card-header-pic">
-    <div style="background-image:url(http://lorempixel.com/1000/600/nature/3/)"
-        class="card-header align-items-flex-end">Journey To Mountains</div>
-    <div>
-        <!-- Aca va la parte del organizador. -->
-    </div>
-    <div class="card-content card-content-padding">
-        <p class="date">Posted on January 21, 2015</p>
-        <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis.
-            Phasellus quis nibh hendrerit...</p>
-    </div>
-    <div class="card-footer"><a href="#" class="link">Mas info</a><a href="#" class="link">Asistir</a></div>
-  </div>
-`);
-  }
 
+    // Esto genera las card de los posteos.
+    $$('#feed-container').append(`
+      <div class="card demo-card-header-pic">
+        <div style="background-image:url(http://lorempixel.com/1000/600/nature/3/)"
+          class="card-header align-items-flex-end">Journey To Mountains</div>
+        <div>
+            <!-- Aca va la parte del organizador. -->
+        </div>
+        <div class="card-content card-content-padding">
+          <p class="date">Posted on January 21, 2015</p>
+          <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis.
+              Phasellus quis nibh hendrerit...</p>
+        </div>
+        <div class="card-footer"><a href="#" class="link">Mas info</a><a href="#" class="link">Asistir</a></div>
+      </div>
+    `);
+  }
 
 })
