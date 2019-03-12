@@ -24,12 +24,50 @@ var app = new Framework7({
       name: 'main-screen',
       path: '/main-screen/',
       url: 'main-screen.html'
+    },
+    {
+      name: 'login-screen',
+      path: '/login-screen/',
+      url: 'login-screen.html'
     }
   ]
   // ... other parameters
 });
 
 var mainView = app.views.create('.view-main');
+
+class emailProvider {
+  constructor() {
+    
+  }
+
+  registro(email, password) {
+    console.log("Hello world");
+    console.log(email)
+    console.log(password)
+    
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function () {
+        console.log("Usuario creado");
+        app.views.main.router.navigate({ name: 'main-screen' })
+      })
+      .catch(function (error) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log("Usuario creado");
+        }
+      });
+  }
+
+  login(){
+    console.log("Hola")
+  }
+}
+
+emailProvider = new emailProvider;
+
+// var emailProvider = new emailProvider();
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
@@ -41,31 +79,22 @@ $$(document).on('page:init', function (e) {
 
   console.log(e)
 
-
-
+  // Registro
 
   $$('#register-button').click(function (e) {
     e.preventDefault();
-    console.log("Hello world");
-
+    
     var email = $$('#login-email').val();
     var password = $$('#login-password').val();
 
-    console.log(email)
-    console.log(password)
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(function () { 
-        console.log("Usuario creado");
-        app.views.main.router.navigate({name: 'main-screen'})
-       })
-       .catch(function (error) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log("Usuario creado");
-        }
-      });
+    emailProvider.registro(email, password);
 
+  });
+
+  $$('#gotologin').click(function (e) { 
+    e.preventDefault();
+    console.log("gotologin")
+    app.views.main.router.navigate({ name: 'login-screen' })
   });
 
 
