@@ -60,8 +60,22 @@ class emailProvider {
       });
   }
 
-  login(){
+  login(email, password){
     console.log("Hola")
+    console.log(email)
+    console.log(password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function(){
+        console.log("Usuario creado");
+        app.views.main.router.navigate({ name: 'main-screen' });
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.log(error)
+      });
   }
 }
 
@@ -84,8 +98,8 @@ $$(document).on('page:init', function (e) {
   $$('#register-button').click(function (e) {
     e.preventDefault();
     
-    var email = $$('#login-email').val();
-    var password = $$('#login-password').val();
+    var email = $$('#register-email').val();
+    var password = $$('#register-password').val();
 
     emailProvider.registro(email, password);
 
@@ -97,6 +111,13 @@ $$(document).on('page:init', function (e) {
     app.views.main.router.navigate({ name: 'login-screen' })
   });
 
+  $$('#login-button').click(function (e) { 
+    console.log("login-button");
+
+    var email = $$('#login-email').val();
+    var password = $$('#login-password').val();
+    emailProvider.login(email, password);
+   })
 
 })
 
