@@ -1,5 +1,4 @@
 // Initialize app
-var myApp = new Framework7();
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
@@ -22,6 +21,7 @@ var app = new Framework7({
       url: 'about.html',
     },
     {
+      name: 'main-screen',
       path: '/main-screen/',
       url: 'main-screen.html'
     }
@@ -41,44 +41,31 @@ $$(document).on('page:init', function (e) {
 
   console.log(e)
 
-  var provider = new firebase.auth.GoogleAuthProvider();
-  // El idioma
-  firebase.auth().languageCode = 'es';
 
-  $$('#GoogleLogin').on('click', function (e) {
-    console.log("Hola")
 
-    // firebase.auth().signInWithPopup(provider).then(function (result) {
-    //   // This gives you a Google Access Token. You can use it to access the Google API.
-    //   var token = result.credential.accessToken;
-    //   // The signed-in user info.
-    //   var user = result.user;
-    //   // ...
-    // }).catch(function (error) {
-    //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   var email = error.email;
-    //   // The firebase.auth.AuthCredential type that was used.
-    //   var credential = error.credential;
-    //   // ...
-    // });
 
-    firebase.auth().signInWithRedirect(provider).then(function() {
-      return firebase.auth().getRedirectResult();
-    }).then(function(result) {
-      // This gives you a Google Access Token.
-      // You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
+  $$('#register-button').click(function (e) {
+    e.preventDefault();
+    console.log("Hello world");
+
+    var email = $$('#login-email').val();
+    var password = $$('#login-password').val();
+
+    console.log(email)
+    console.log(password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function () { 
+        console.log("Usuario creado");
+        app.views.main.router.navigate({name: 'main-screen'})
+       })
+       .catch(function (error) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log("Usuario creado");
+        }
+      });
+
   });
 
 
