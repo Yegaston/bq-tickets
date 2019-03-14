@@ -33,7 +33,7 @@ var app = new Framework7({
     {
       name: 'evento',
       path: '/evento/',
-      url: 'login-screen.html'
+      url: 'evento.html'
     }
   ]
   // ... other parameters
@@ -61,7 +61,7 @@ $$(document).on('page:init', function (e) {
 
   $$('#register-button').click(function (e) {
     e.preventDefault();
-    
+
     var email = $$('#register-email').val();
     var password = $$('#register-password').val();
 
@@ -69,7 +69,7 @@ $$(document).on('page:init', function (e) {
 
   });
 
-  $$('#gotologin').click(function (e) { 
+  $$('#gotologin').click(function (e) {
     e.preventDefault();
     console.log("gotologin")
     app.views.main.router.navigate({ name: 'login-screen' })
@@ -89,13 +89,36 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
   console.log("Login Page Loaded")
-  $$('#login-button').click(function (e) { 
+  $$('#login-button').click(function (e) {
     console.log("login-button");
 
     var email = $$('#login-email').val();
     var password = $$('#login-password').val();
     emailProvider.login(email, password);
-   })
+  })
+})
+
+$$(document).on('page:init', '.page[data-name="evento"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  console.log(e);
+
+  for (var i = 0; i < 3; i++) {
+    $$('#entradas-options').append(`
+        <li class="accordion-item"><a href="#" class="item-content item-link">
+            <div class="item-inner">
+                <div class="item-title">Opcion 1(General S/A) <!-- Viene desde un objeto --></div>
+            </div></a>
+            <div class="accordion-item-content">
+                <div class="block">
+                    <div>
+                        <p>Descripcion de la opcion</p>
+                        <a href="#">Conseguir en servicio externo</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    `);
+  }
 })
 
 
@@ -123,5 +146,11 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
       </div>
     `);
   }
+
+  $$('#mas-info-header').click(function (e) {
+    e.preventDefault();
+    console.log("Evento Button Click")
+    app.views.main.router.navigate({ name: 'evento' })
+  });
 
 })
