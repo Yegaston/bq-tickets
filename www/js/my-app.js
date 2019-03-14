@@ -3,6 +3,8 @@
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
+
+
 var app = new Framework7({
   // App root element
   root: '#app',
@@ -35,9 +37,16 @@ var app = new Framework7({
       path: '/evento/',
       url: 'evento.html'
     }
-  ]
+  ],
   // ... other parameters
+  panel: {
+    
+  }
 });
+
+
+// El panel
+
 
 var mainView = app.views.create('.view-main');
 
@@ -119,6 +128,7 @@ $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
         </li>
     `);
   }
+
 })
 
 

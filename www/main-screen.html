@@ -4,7 +4,8 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="left">
-                <i class="f7-icons">icon-bars</i>
+                <a href="#" data-panel="left" class="panel-open"><i class="f7-icons">icon-bars</i></a>
+
             </div>
             <div class="title">Inicio</div>
             <div class="right">
@@ -27,6 +28,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- Card -->
         <div id="feed-container">
 
@@ -34,4 +37,12 @@
 
     </div>
 
-</div>
+    <div class="panel panel-left panel-reveal">
+        <div class="block">
+            <p>{{El usuario}}</p>
+            <p><a class="panel-close color-gray" href="#">Feed</a></p>
+            <p><a class="panel-open" href="#" data-panel="right">Asistire</a></p>
+            <p><a class="panel-open" href="#" data-panel="right">Cuenta</a></p>
+        </div>
+
+    </div>
