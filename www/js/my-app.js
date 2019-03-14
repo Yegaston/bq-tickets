@@ -29,6 +29,11 @@ var app = new Framework7({
       name: 'login-screen',
       path: '/login-screen/',
       url: 'login-screen.html'
+    },
+    {
+      name: 'evento',
+      path: '/evento/',
+      url: 'login-screen.html'
     }
   ]
   // ... other parameters
@@ -36,48 +41,7 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main');
 
-class emailProvider {
-  constructor() {
-    
-  }
 
-  registro(email, password) {
-    console.log("Hello world");
-    console.log(email)
-    console.log(password)
-    
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(function () {
-        console.log("Usuario creado");
-        app.views.main.router.navigate({ name: 'main-screen' })
-      })
-      .catch(function (error) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log("Usuario creado");
-        }
-      });
-  }
-
-  login(email, password){
-    console.log("Hola")
-    console.log(email)
-    console.log(password)
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(function(){
-        console.log("Usuario creado");
-        app.views.main.router.navigate({ name: 'main-screen' });
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-        console.log(error)
-      });
-  }
-}
 
 emailProvider = new emailProvider;
 
@@ -111,13 +75,7 @@ $$(document).on('page:init', function (e) {
     app.views.main.router.navigate({ name: 'login-screen' })
   });
 
-  $$('#login-button').click(function (e) { 
-    console.log("login-button");
 
-    var email = $$('#login-email').val();
-    var password = $$('#login-password').val();
-    emailProvider.login(email, password);
-   })
 
 })
 
@@ -126,6 +84,20 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
 })
+
+$$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  console.log(e);
+  console.log("Login Page Loaded")
+  $$('#login-button').click(function (e) { 
+    console.log("login-button");
+
+    var email = $$('#login-email').val();
+    var password = $$('#login-password').val();
+    emailProvider.login(email, password);
+   })
+})
+
 
 $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
