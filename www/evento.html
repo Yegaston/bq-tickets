@@ -3,11 +3,14 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="left">
-                <i class="f7-icons">icon-bars</i>
+                <a href="#" data-panel="left" class="panel-open"><i class="f7-icons">icon-bars</i></a>
             </div>
-            <div class="title">Inicio</div>
+            <div class="title">{{Evento}}</div>
             <div class="right">
-                <a href="#" class="link"><a href="#" class="link"><i class="f7-icons">search</i></a></a>
+                <a href="/main-screen/" class="link">
+                    <i class="icon icon-back"></i>
+                    <span>Back</span>
+                </a>
             </div>
         </div>
     </div>
@@ -31,8 +34,20 @@
     <div class="list accordion-list">
         <ul id="entradas-options">
             <script>
-               
+
             </script>
         </ul>
     </div>
+
+    <div class="panel panel-left panel-reveal">
+        <div class="block">
+            <p>{{El usuario}}</p>
+            <p><a class="panel-close color-gray" href="#">Inicio</a></p>
+            <p><a class="panel-open" href="#" data-panel="right">Asistire</a></p>
+            <p><a class="panel-open" href="#" data-panel="right">Amigos</a></p>
+            <p><a class="panel-open" href="#" data-panel="right">Cuenta</a></p>
+        </div>
+    </div>
+
+
 </div>
