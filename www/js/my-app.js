@@ -158,7 +158,7 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
     // Esto genera las card de los posteos.
     $$('#feed-container').append(`
       <div class="card demo-card-header-pic">
-        <div style="background-image:url(http://lorempixel.com/1000/600/nature/3/)"
+        <div style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRptiPOrwVa5w_tmxE5lF_S1i9sIrx8ZAQHqBPptzt4Qk01EX0M)"
           class="card-header align-items-flex-end">Journey To Mountains</div>
         <div>
             <!-- Aca va la parte del organizador. -->
