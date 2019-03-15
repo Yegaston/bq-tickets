@@ -4,7 +4,7 @@
 var $$ = Dom7;
 
 
-
+// APP SETTINGS
 var app = new Framework7({
   // App root element
   root: '#app',
@@ -45,13 +45,11 @@ var app = new Framework7({
 });
 
 
-// El panel
-
-
 var mainView = app.views.create('.view-main');
 
 
-
+// CLASES DECLARATIONS
+// THIS USE FOR THE AUTH WITH MAIL
 emailProvider = new emailProvider;
 
 // var emailProvider = new emailProvider();
@@ -60,6 +58,11 @@ emailProvider = new emailProvider;
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
 });
+
+
+// ###########
+// INIT
+// ###########
 
 // Option 1. Using one 'page:init' handler for all pages
 $$(document).on('page:init', function (e) {
@@ -94,6 +97,11 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   console.log(e);
 })
 
+// ###########
+// LOGIN
+// ###########
+
+
 $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
@@ -106,6 +114,11 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
     emailProvider.login(email, password);
   })
 })
+
+// ###########
+// EVENTO
+// ###########
+
 
 $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
@@ -131,6 +144,9 @@ $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
 
 })
 
+// ###########
+// MAIN SCREN
+// ###########
 
 $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
