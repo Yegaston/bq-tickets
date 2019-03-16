@@ -40,69 +40,56 @@
     <div id="app">
         <!-- Statusbar overlay -->
         <div class="statusbar"></div>
+        <!-- Navbar -->
 
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
+
             <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
 
-                <!-- Scrollable page content -->
-                <div class="page-content pantalla-100">
+                <!-- Navbar -->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left">
+                            <a href="#" data-panel="left" class="panel-open"><i class="f7-icons">icon-bars</i></a>
 
-                    <div id="parteSuperior" class="row display-flex justify-content-center pantalla-70">
-                        <div class="cuadrado align-self-center" id="bqCuadrado">
-                            <div class="text-align-center ">
-                                <h1 class="align-self-center justify-content-center">bq</h1>
-                            </div>
+                        </div>
+                        <div class="title">Inicio</div>
+                        <div class="right">
+                            <a href="#" class="link"><a href="#" class="link"><i class="f7-icons">search</i></a></a>
                         </div>
                     </div>
-
-                    <div class="pantalla-25">
-                        <div id="parteInferior" class="row display-flex justify-content-center">
-                            <div class="align-self-center">
-                                <div>
-                                    <h3 class="f-size-20 color-gray">
-                                        Ingrese con su cuenta de Email
-                                    </h3>
-                                    <a id="gotologin">Click aqui para ingresar</a>
-                                </div>
-
-                                <div class="list no-hairlines-md">
-                                    <ul>
-                                        <li class="item-content item-input item-input-with-info">
-                                            <div class="item-inner">
-                                                <div class="item-input-wrap">
-                                                    <input id="register-email" type="email" placeholder="Email">
-                                                    <span class="input-clear-button"></span>
-                                                    <div class="item-input-info">Email</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item-content item-input item-input-with-info">
-                                            <div class="item-inner">
-                                                <div class="item-input-wrap">
-                                                    <input id="register-password" type="password" placeholder="Clave">
-                                                    <span class="input-clear-button"></span>
-                                                    <div class="item-input-info">Mayor a 8 digitos</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item-content item-button">
-                                            <button id="register-button" class="col button button-fill">Register</button>
-
-                                        </li>
-                                    </ul>
-                                </div>
+                </div>
 
 
-                                <div>
-                                    <h4 class="f-size-15 color-gray">Prometemos cuidar su privacidad. :)</h4>
-                                </div>
-                            </div>
+                <!-- Header -->
+                <div class="img-container">
+                    <div class="image-div display-flex">
+                        <div class="fab fab-extended fab-center-top color-green">
+                            <a id="mas-info-header" href="#">
+                                <i class="icon f7-icons ios-only">add</i>
+                                <div class="fab-text">Mas info</div>
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- <a href="/about/" data-view=".page-content">About app</a> -->
+                <!-- Feed -->
+                <!-- Card -->
+                <div id="feed-container">
+
+                </div>
+
+
+            </div>
+            <div class="panel panel-left panel-reveal">
+                <div class="block">
+                    <p id="user-email-panel">{{El usuario}}</p>
+                    <p><a class="panel-close color-gray" href="#">Inicio</a></p>
+                    <p><a class="panel-open" href="#" data-panel="right">Asistire</a></p>
+                    <p><a class="panel-open" href="#" data-panel="right">Amigos</a></p>
+                    <p><a class="panel-open" href="#" data-panel="right">Cuenta</a></p>
                 </div>
             </div>
         </div>
@@ -110,9 +97,11 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="./js/emailProvider.js"></script>
+    <script type="text/javascript" src="./js/db-eventos.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>  -->
     <script>
         // Initialize Firebase
         var config = {

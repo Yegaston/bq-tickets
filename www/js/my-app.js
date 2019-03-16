@@ -36,11 +36,21 @@ var app = new Framework7({
       name: 'evento',
       path: '/evento/',
       url: 'evento.html'
-    }
+    },
+    {
+      name: 'register',
+      path: '/register/',
+      url: 'register.html'
+    },
+    {
+      name: 'index',
+      path: '/index/',
+      url: 'index.html'
+    },
   ],
   // ... other parameters
   panel: {
-    
+
   }
 });
 
@@ -57,7 +67,17 @@ emailProvider = new emailProvider;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
+  automaticGenerateEvents();
 });
+
+// ###########
+// VARIABLES GLOBALES
+// ###########
+
+// EMAIL DE LA SESION
+
+var userEmail = ''
+
 
 
 // ###########
@@ -69,32 +89,58 @@ $$(document).on('page:init', function (e) {
 
   console.log(e)
 
-  // Registro
+  if (userEmail) {
+    // Aca me traigo los datos de ese usuario
+  } else {
+    app.views.main.router.navigate({ name: 'register' });
+  }
 
-  $$('#register-button').click(function (e) {
+
+
+})
+
+// ###########
+// INDEX
+// ###########
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+  // Esto genera el feed
+
+  // Asigna el nombre en el panel
+  $$('#user-email-panel').text(userEmail);
+
+
+  for (var i = 0; i < 3; i++) {
+
+    // Esto genera las card de los posteos.
+    $$('#feed-container').append(`
+    <div class="card demo-card-header-pic">
+      <div style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRptiPOrwVa5w_tmxE5lF_S1i9sIrx8ZAQHqBPptzt4Qk01EX0M)"
+        class="card-header align-items-flex-end">Journey To Mountains</div>
+      <div>
+          <!-- Aca va la parte del organizador. -->
+      </div>
+      <div class="card-content card-content-padding">
+        <p class="date">Posted on January 21, 2015</p>
+        <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis.
+            Phasellus quis nibh hendrerit...</p>
+      </div>
+      <div class="card-footer"><a href="#" class="link">Mas info</a><a href="#" class="link">Asistir</a></div>
+    </div>
+  `);
+  }
+
+  $$('#mas-info-header').click(function (e) {
     e.preventDefault();
-
-    var email = $$('#register-email').val();
-    var password = $$('#register-password').val();
-
-    emailProvider.registro(email, password);
-
+    console.log("Evento Button Click")
+    app.views.main.router.navigate({ name: 'evento' })
   });
-
-  $$('#gotologin').click(function (e) {
-    e.preventDefault();
-    console.log("gotologin")
-    app.views.main.router.navigate({ name: 'login-screen' })
-  });
-
-
-
 })
 
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
+
 })
 
 // ###########
@@ -119,6 +165,26 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
 // EVENTO
 // ###########
 
+$$(document).on('page:init', '.page[data-name="register"]', function (e) {
+
+  // Registro
+
+  $$('#register-button').click(function (e) {
+    e.preventDefault();
+
+    var email = $$('#register-email').val();
+    var password = $$('#register-password').val();
+
+    emailProvider.registro(email, password);
+
+  });
+
+  $$('#gotologin').click(function (e) {
+    e.preventDefault();
+    console.log("gotologin")
+    app.views.main.router.navigate({ name: 'login-screen' })
+  });
+})
 
 $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
@@ -152,31 +218,5 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
 
-  // Esto genera el feed
-  for (var i = 0; i < 3; i++) {
-
-    // Esto genera las card de los posteos.
-    $$('#feed-container').append(`
-      <div class="card demo-card-header-pic">
-        <div style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRptiPOrwVa5w_tmxE5lF_S1i9sIrx8ZAQHqBPptzt4Qk01EX0M)"
-          class="card-header align-items-flex-end">Journey To Mountains</div>
-        <div>
-            <!-- Aca va la parte del organizador. -->
-        </div>
-        <div class="card-content card-content-padding">
-          <p class="date">Posted on January 21, 2015</p>
-          <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis.
-              Phasellus quis nibh hendrerit...</p>
-        </div>
-        <div class="card-footer"><a href="#" class="link">Mas info</a><a href="#" class="link">Asistir</a></div>
-      </div>
-    `);
-  }
-
-  $$('#mas-info-header').click(function (e) {
-    e.preventDefault();
-    console.log("Evento Button Click")
-    app.views.main.router.navigate({ name: 'evento' })
-  });
 
 })

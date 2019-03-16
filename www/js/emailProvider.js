@@ -11,7 +11,8 @@ class emailProvider {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function () {
           console.log("Usuario creado");
-          app.views.main.router.navigate({ name: 'main-screen' })
+          userEmail = email;
+          app.views.main.router.navigate({ name: 'index' });
         })
         .catch(function (error) {
           if (error) {
@@ -28,8 +29,9 @@ class emailProvider {
       console.log(password)
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(){
-          console.log("Usuario creado");
-          app.views.main.router.navigate({ name: 'main-screen' });
+          console.log("Usuario Logeado");
+          userEmail = email;
+          app.views.main.router.navigate({ name: 'index' });
         })
         .catch(function(error) {
           // Handle Errors here.
