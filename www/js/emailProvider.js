@@ -12,7 +12,7 @@ class emailProvider {
         .then(function () {
           console.log("Usuario creado");
           userEmail = email;
-          app.views.main.router.navigate({ name: 'index' });
+          app.views.main.router.navigate({ name: 'register-done' });
         })
         .catch(function (error) {
           if (error) {

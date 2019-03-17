@@ -141,13 +141,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   });
 })
 
-// Option 2. Using live 'page:init' event handlers for each page
-$$(document).on('page:init', '.page[data-name="about"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log(e);
-
-})
-
 // ###########
 // LOGIN
 // ###########
@@ -184,11 +177,6 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
     e.preventDefault();
     console.log("gotologin")
     app.views.main.router.navigate({ name: 'login-screen' })
-  });
-
-  $$('#doneregistertest').click(function (e) {
-    e.preventDefault();
-    app.views.main.router.navigate({ name: 'register-done' })
   });
 
 })
@@ -248,7 +236,10 @@ $$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
     });
   });
 
-
+  $$('#done-continue').click(function (e) { 
+    e.preventDefault();
+    app.views.main.router.navigate({ name: 'index' })    
+  });
 
 
 
@@ -257,7 +248,6 @@ $$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
 // ###########
 // MAIN SCREN
 // ###########
-
 $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
