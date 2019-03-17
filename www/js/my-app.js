@@ -186,7 +186,7 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
     app.views.main.router.navigate({ name: 'login-screen' })
   });
 
-  $$('#doneregistertest').click(function (e) { 
+  $$('#doneregistertest').click(function (e) {
     e.preventDefault();
     app.views.main.router.navigate({ name: 'register-done' })
   });
@@ -220,6 +220,37 @@ $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
         </li>
     `);
   }
+
+})
+// ###########
+// Register done
+// ###########
+$$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
+  // Do something here when page with data-name="about" attribute loaded and initialized
+  console.log(e);
+
+  $$('#done-name').text(userEmail);
+
+  const tags = ['rock', 'musica', 'rosario', 'niños', 'teatro', 'deportes', 'futbol', 'copa']
+
+  tags.forEach(tag => {
+    $$('#tags-container').append(` 
+      <div id="${tag}" class="chip chip-outline">
+        <div class="chip-label">${tag}</div>
+      </div>
+    `);
+  });
+
+  tags.forEach(tag => {
+    $$(`#${tag}`).click(function (e) {
+      e.preventDefault();
+      $$(`#${tag}`).removeClass('chip-outline');
+    });
+  });
+
+
+
+
 
 })
 
