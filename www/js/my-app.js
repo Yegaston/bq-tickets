@@ -47,6 +47,11 @@ var app = new Framework7({
       path: '/index/',
       url: 'index.html'
     },
+    {
+      name: 'register-done',
+      path: '/register-done/',
+      url: 'register-done.html'
+    },
   ],
   // ... other parameters
   panel: {
@@ -67,7 +72,7 @@ emailProvider = new emailProvider;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
-  automaticGenerateEvents();
+  // automaticGenerateEvents();
 });
 
 // ###########
@@ -146,8 +151,6 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
 // ###########
 // LOGIN
 // ###########
-
-
 $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
@@ -162,12 +165,10 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
 })
 
 // ###########
-// EVENTO
+// REGISTRO
 // ###########
-
 $$(document).on('page:init', '.page[data-name="register"]', function (e) {
 
-  // Registro
 
   $$('#register-button').click(function (e) {
     e.preventDefault();
@@ -184,8 +185,20 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
     console.log("gotologin")
     app.views.main.router.navigate({ name: 'login-screen' })
   });
+
+  $$('#doneregistertest').click(function (e) { 
+    e.preventDefault();
+    app.views.main.router.navigate({ name: 'register-done' })
+  });
+
 })
 
+
+
+
+// ###########
+// EVENTO
+// ###########
 $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
   // Do something here when page with data-name="about" attribute loaded and initialized
   console.log(e);
