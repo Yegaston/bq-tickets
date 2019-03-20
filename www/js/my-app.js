@@ -66,13 +66,14 @@ var mainView = app.views.create('.view-main');
 // CLASES DECLARATIONS
 // THIS USE FOR THE AUTH WITH MAIL
 emailProvider = new emailProvider;
-
 // var emailProvider = new emailProvider();
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
-  // automaticGenerateEvents();
+  // emailProvider.automaticGenerateEvents();
+  
 });
 
 // ###########
@@ -114,25 +115,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   $$('#user-email-panel').text(userEmail);
 
 
-  for (var i = 0; i < 3; i++) {
-
-    // Esto genera las card de los posteos.
-    $$('#feed-container').append(`
-    <div class="card demo-card-header-pic">
-      <div style="background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRptiPOrwVa5w_tmxE5lF_S1i9sIrx8ZAQHqBPptzt4Qk01EX0M)"
-        class="card-header align-items-flex-end">Journey To Mountains</div>
-      <div>
-          <!-- Aca va la parte del organizador. -->
-      </div>
-      <div class="card-content card-content-padding">
-        <p class="date">Posted on January 21, 2015</p>
-        <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis.
-            Phasellus quis nibh hendrerit...</p>
-      </div>
-      <div class="card-footer"><a href="#" class="link">Mas info</a><a href="#" class="link">Asistir</a></div>
-    </div>
-  `);
-  }
+  emailProvider.getEventsDataIndexCards();
 
   $$('#mas-info-header').click(function (e) {
     e.preventDefault();
@@ -236,9 +219,9 @@ $$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
     });
   });
 
-  $$('#done-continue').click(function (e) { 
+  $$('#done-continue').click(function (e) {
     e.preventDefault();
-    app.views.main.router.navigate({ name: 'index' })    
+    app.views.main.router.navigate({ name: 'index' })
   });
 
 

@@ -1,6 +1,44 @@
 <div class="page pantalla-100" data-name="register-done">
     <p1>Gracias por registrarte <span id="done-name"></span></p1>
 
+    <div class="block-title">Unos poquitos datos mas :)</div>
+    <div class="list no-hairlines-md">
+        <ul>
+            <!-- Nombre y Apellido -->
+            <li class="item-content item-input item-input-with-info">
+                <div class="item-media">
+                    <i class="icon demo-list-icon"></i>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Nombre y Apellido</div>
+                    <div class="item-input-wrap">
+                        <input type="text" placeholder="Your name" required validate>
+                        <span class="input-clear-button"></span>
+                        <div class="item-input-info">Nombre y Apellido</div>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Edad -->
+            <li class="item-content item-input item-input-with-info">
+                <div class="item-media">
+                    <i class="icon demo-list-icon"></i>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Number</div>
+                    <div class="item-input-wrap">
+                        <input type="text" placeholder="Enter number" required validate pattern="[0-9]*"
+                            data-error-message="Only numbers please!">
+                        <span class="input-clear-button"></span>
+                        <div class="item-input-info">Ingrese su edad.</div>
+                    </div>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+
+
     <div>
         <div class="block-title">Elije lo que mas te guste. :)</div>
         <div id="tags-container" class="block block-strong">
