@@ -157,9 +157,20 @@ class emailProvider {
       .then(function () {
         app.views.main.router.navigate({ name: 'index' });
       })
-      .catch(function(err){
+      .catch(function (err) {
         console.log(err);
       })
+  }
+
+  logout() {
+    firebase.auth().signOut().then(function () {
+      app.views.main.router.navigate({ name: 'login-screen' });
+      userEmail = '';
+      userTags = [];
+
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 
 }

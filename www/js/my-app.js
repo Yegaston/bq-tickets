@@ -121,6 +121,12 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     console.log("Evento Button Click")
     app.views.main.router.navigate({ name: 'evento' })
   });
+  
+  $$('#logout').click(function (e) { 
+    e.preventDefault();
+    emailProvider.logout();
+  });
+
 })
 
 // ###########
