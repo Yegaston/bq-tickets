@@ -52,6 +52,11 @@ var app = new Framework7({
       path: '/register-done/',
       url: 'register-done.html'
     },
+    {
+      name: 'cuenta',
+      path: '/cuenta/',
+      url: 'cuenta.html'
+    },
   ],
   // ... other parameters
   panel: {
@@ -127,6 +132,13 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     emailProvider.logout();
   });
 
+  // Tirar y recargar
+
+  $$('.ptr-content').on('ptr:refresh', function(e){
+    console.log("Reloading")
+    $$('#feed-container').html('');
+    emailProvider.getEventsDataIndexCards();
+  })
 })
 
 // ###########
