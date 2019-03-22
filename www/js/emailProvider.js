@@ -140,5 +140,27 @@ class emailProvider {
 
   }
 
+
+  pushUserData(name, age, tags) {
+    console.log(name, age)
+    console.log(tags)
+
+    const user = {
+      name: name,
+      age: age,
+      tags: tags,
+    }
+
+    var db = firebase.firestore();
+
+    db.collection("users").doc(userEmail).set(user)
+      .then(function () {
+        app.views.main.router.navigate({ name: 'index' });
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+  }
+
 }
 

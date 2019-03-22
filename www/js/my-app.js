@@ -82,7 +82,7 @@ $$(document).on('deviceready', function () {
 // EMAIL DE LA SESION
 
 var userEmail = '';
-
+var userTags = [];
 
 
 // ###########
@@ -215,12 +215,18 @@ $$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
     $$(`#${tag}`).click(function (e) {
       e.preventDefault();
       $$(`#${tag}`).removeClass('chip-outline');
+      console.log(tag);
+      userTags.push(tag);
+      console.log(userTags);
     });
   });
 
   $$('#done-continue').click(function (e) {
     e.preventDefault();
-    app.views.main.router.navigate({ name: 'index' })
+    var userName = $$('#userName').val();
+    var userAge = $$('#userAge').val();
+    
+    emailProvider.pushUserData(userName, userAge, userTags);
   });
 
 
