@@ -136,7 +136,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
   $$('.ptr-content').on('ptr:refresh', function(e){
     console.log("Reloading")
-    $$('#feed-container').html('');
     emailProvider.getEventsDataIndexCards();
   })
 })
@@ -259,4 +258,15 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
   console.log(e);
 
 
+})
+
+// ###########
+// CUENTA SCREEN
+// ###########
+$$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
+
+  var usuario = emailProvider.getUserByEmail(userEmail);
+  // console.log(usuario);
+  
+  
 })

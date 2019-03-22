@@ -116,6 +116,8 @@ class emailProvider {
   getEventsDataIndexCards() {
     var db = firebase.firestore();
 
+    $$('#feed-container').html('');
+
     db.collection("eventos").get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
@@ -173,5 +175,27 @@ class emailProvider {
     });
   }
 
+  getUserByEmail(email) {
+    var db = firebase.firestore();
+
+    var usersRef = db.collection("users")
+
+    usersRef.doc(email).get().then(function (doc) {
+      if (doc.exists) {
+        console.log(doc)
+
+        console.log(doc.data().name)
+        console.log(doc.data().age)
+        $$('#cuentaName').text(doc.data().name);
+        $$('#cuentaEmail').text(doc.id)
+        return doc
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+  }
 }
 
