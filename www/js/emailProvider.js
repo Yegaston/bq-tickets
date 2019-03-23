@@ -197,5 +197,7 @@ class emailProvider {
       console.log("Error getting document:", error);
     });
   }
+
+  
 }
 

@@ -57,6 +57,11 @@ var app = new Framework7({
       path: '/cuenta/',
       url: 'cuenta.html'
     },
+    {
+      name: 'amigos',
+      path: '/amigos/',
+      url: 'amigos.html'
+    },
   ],
   // ... other parameters
   panel: {
@@ -77,7 +82,7 @@ emailProvider = new emailProvider;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
   console.log("Device is ready!");
-//  automaticGenerateEvents();
+  //  automaticGenerateEvents();
 });
 
 // ###########
@@ -126,15 +131,15 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     console.log("Evento Button Click")
     app.views.main.router.navigate({ name: 'evento' })
   });
-  
-  $$('#logout').click(function (e) { 
+
+  $$('#logout').click(function (e) {
     e.preventDefault();
     emailProvider.logout();
   });
 
   // Tirar y recargar
 
-  $$('.ptr-content').on('ptr:refresh', function(e){
+  $$('.ptr-content').on('ptr:refresh', function (e) {
     console.log("Reloading")
     emailProvider.getEventsDataIndexCards();
   })
@@ -242,7 +247,7 @@ $$(document).on('page:init', '.page[data-name="register-done"]', function (e) {
     e.preventDefault();
     var userName = $$('#userName').val();
     var userAge = $$('#userAge').val();
-    
+
     emailProvider.pushUserData(userName, userAge, userTags);
   });
 
@@ -267,6 +272,34 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
   var usuario = emailProvider.getUserByEmail(userEmail);
   // console.log(usuario);
-  
-  
+
+
+})
+
+
+// ###########
+// AMIGOS SCREEN
+// ###########
+$$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
+  const amigos = ['Luis Suarez', 'Ousmane Dembele', 'Samuel Umtiti', 'Rafinha', 'Nelson Semedo']
+
+  amigos.forEach(amigo => {
+    $$('#contactos').append(
+      `<li>
+        <div class="item-content">
+          <div class="item-inner">
+            <div id="${amigo}" class="item-title">${amigo}</div>
+          </div>
+        </div>
+      </li>`
+    );
+  });
+
+  amigos.forEach(amigo => {
+    $$(`#${amigo}`).click(function (e) {
+      e.preventDefault();
+      console.log(amigo)
+    });
+  });
+
 })
