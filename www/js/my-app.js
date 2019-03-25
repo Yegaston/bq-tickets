@@ -62,6 +62,11 @@ var app = new Framework7({
       path: '/amigos/',
       url: 'amigos.html'
     },
+    {
+      name: 'welcome',
+      path: '/welcome/',
+      url: 'welcome.html'
+    },
   ],
   // ... other parameters
   panel: {
@@ -107,7 +112,7 @@ $$(document).on('page:init', function (e) {
   if (userEmail) {
     // Aca me traigo los datos de ese usuario
   } else {
-    app.views.main.router.navigate({ name: 'register' });
+    app.views.main.router.navigate({ name: 'welcome' });
   }
 
 
