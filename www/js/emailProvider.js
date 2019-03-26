@@ -112,6 +112,61 @@ class emailProvider {
 
   }
 
+  // getUserEvents(userID) {
+  //   var db = firebase.firestore();
+
+
+  // }
+
+  asistirButton(eventoID, userID) {
+    var db = firebase.firestore();
+    console.log(eventoID, userID)
+
+    var docRef = db.collection("users").doc(userID);
+
+
+    var eventsArray = []
+
+    docRef.get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log("User events:", doc.data().Asistir);
+          if (doc.data().Asistir) {
+            var eventsArray = doc.data().Asistir
+            eventsArray.push(eventoID)
+            return docRef.update({ Asistir: eventsArray })
+              .then(function () {
+                console.log("Camp updated")
+                console.log(eventsArray)
+              })
+              .catch(function (err) {
+                console.log(err)
+              });
+          } else {
+            return docRef.update({ Asistir: [eventoID] })
+              .then(function () {
+                console.log("Camp added")
+                console.log(eventoID)
+              })
+              .catch(function (err) {
+                console.log(err)
+              });
+          }
+
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+
+
+
+  }
+
   // Recibo los datos
   getEventsDataIndexCards() {
     var db = firebase.firestore();
@@ -134,7 +189,7 @@ class emailProvider {
               <p class="date">El evento es: ${doc.data().Dia}</p>
               <p>${doc.data().descrip}. Organizador: <span><b>${doc.data().organizador}</b></span></p>
             </div>
-            <div class="card-footer"><a class="link sheet-open" data-sheet=".my-sheet">Mas info</a><a href="#" class="link">Asistir</a></div>
+            <div class="card-footer"><a class="link sheet-open" data-sheet=".my-sheet" >Mas info</a><a href="#" class="link" onclick="emailProvider.asistirButton('${doc.id}', '${userEmail}')">Asistir</a></div>
           </div>
   `);
       });
@@ -198,6 +253,6 @@ class emailProvider {
     });
   }
 
-  
+
 }
 

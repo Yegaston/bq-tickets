@@ -190,9 +190,6 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
 
 })
 
-
-
-
 // ###########
 // EVENTO
 // ###########
