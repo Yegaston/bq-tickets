@@ -124,6 +124,11 @@ class emailProvider {
 
     var docRef = db.collection("users").doc(userID);
 
+    var toastTop = app.toast.create({
+      text: 'Evento Agregado',
+      position: 'top',
+      closeTimeout: 2000,
+    });
 
     var eventsArray = []
 
@@ -138,19 +143,29 @@ class emailProvider {
               .then(function () {
                 console.log("Camp updated")
                 console.log(eventsArray)
+                $$('.open-toast-top').on('click', function () {
+                  toastTop.open();
+                });
               })
               .catch(function (err) {
                 console.log(err)
               });
+
           } else {
             return docRef.update({ Asistir: [eventoID] })
               .then(function () {
                 console.log("Camp added")
                 console.log(eventoID)
+                
+            $$('.open-toast-top').on('click', function () {
+              toastTop.open();
+            });
+
               })
               .catch(function (err) {
                 console.log(err)
               });
+
           }
 
         } else {
@@ -189,7 +204,7 @@ class emailProvider {
               <p class="date">El evento es: ${doc.data().Dia}</p>
               <p>${doc.data().descrip}. Organizador: <span><b>${doc.data().organizador}</b></span></p>
             </div>
-            <div class="card-footer"><a class="link sheet-open" data-sheet=".my-sheet" >Mas info</a><a href="#" class="link" onclick="emailProvider.asistirButton('${doc.id}', '${userEmail}')">Asistir</a></div>
+            <div class="card-footer"><a class="link sheet-open" data-sheet=".my-sheet" >Mas info</a><a href="#" class="link open-toast-top" onclick="emailProvider.asistirButton('${doc.id}', '${userEmail}')">Asistir</a></div>
           </div>
   `);
       });
