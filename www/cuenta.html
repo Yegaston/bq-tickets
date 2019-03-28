@@ -16,7 +16,9 @@
         </div>
 
         <div>
-            <img class="avatar-image" src="https://avatars0.githubusercontent.com/u/39235181?s=400&u=4ff08dddcad345a00904f3d7cf18cf4c40de5816&v=4" alt="Profile Image">
+            <img class="avatar-image"
+                src="https://avatars0.githubusercontent.com/u/39235181?s=400&u=4ff08dddcad345a00904f3d7cf18cf4c40de5816&v=4"
+                alt="Profile Image">
             <span>
                 <div>
                     <h4>Gaston Graciani</h4>
@@ -26,18 +28,34 @@
         </div>
 
         <div>
-            <button>Subir foto</button>
-        </div>
-        
-        <div>
-            <input type="text" placeholder="Numero de telefono">
+            <button class="col button color-green">Subir Foto</button>
         </div>
 
-        <div>
-            <input type="text" placeholder="Direccion">
+        <div class="list no-hairliness-md">
+            <ul>
+                <li class="item-content item-input item-input-with-info">
+                    <div class="item-inner">
+                        <div class="item-input-wrap">
+                            <input type="text" placeholder="Numero de telefono.">
+                            <span class="input-clear-button"></span>
+                            <div class="item-input-info">Ejemplo: 341323432</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content item-input item-input-with-info">
+                    <div class="item-inner">
+                        <div class="item-input-wrap">
+                            <input type="text" placeholder="Direccion">
+                            <span class="input-clear-button"></span>
+                            <div class="item-input-info">Click en el icono para detectarla automaticamente.</div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
         </div>
 
-        <div>
+        <div class="text-align-center">
             <h1>Sus tags favoritos:</h1>
             <div>
 
@@ -45,7 +63,7 @@
         </div>
 
     </div>
-    
+
     <div class="panel panel-left panel-reveal">
         <div class="block">
             <p>{{El usuario}}</p>
