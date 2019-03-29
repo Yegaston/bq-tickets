@@ -155,3 +155,27 @@
 .avatar-image {
     border-radius: 50%;
 }
+
+.avatar-cuenta {
+    padding: 15px;
+}
+
+.font-18-cuenta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: normal;
+
+    margin: 0px;
+}
+
+.font-14-cuenta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: normal;
+
+    margin: 0px;
+}
