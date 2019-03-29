@@ -272,8 +272,33 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
 // ###########
 $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
-  var usuario = emailProvider.getUserByEmail(userEmail);
-  // console.log(usuario);
+  var db = firebase.firestore();
+  console.log(userEmail)
+  var user = {}
+
+    var UserGet = db.collection("users").doc(userEmail);
+    UserGet.get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          $$('#cuenta-name').text(doc.data().name);
+          $$('#cuenta-email').text(userEmail);
+          if(doc.data().img){
+            $$('#cuenta-img').attr('src', doc.data().img);
+          } else {
+            $$('#cuenta-img').attr('src', 'https://i.imgur.com/oI9j9pR.jpg');
+          }
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+
+
 
 
 })

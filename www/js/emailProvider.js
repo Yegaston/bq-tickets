@@ -268,6 +268,10 @@ class emailProvider {
     });
   }
 
+  cuentaUserData(){
+    var doc = emailProvider.getUserByEmail('messi@barcelona.com');
+    console.log(doc)
+  }
 
 }
 
