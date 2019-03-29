@@ -298,7 +298,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       console.log("Error getting document:", error);
     });
 
-  $('#cuenta-img-button').click(function (e) {
+  $$('#cuenta-img-button').click(function (e) {
     e.preventDefault();
     console.log("Opening Camera??");
     navigator.camera.getPicture(onSuccess, onFail, {
