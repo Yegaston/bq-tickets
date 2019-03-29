@@ -5,5 +5,12 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "displayName": "helloworld",
-    "dependencies": {}
+    "dependencies": {
+        "cordova-plugin-camera": "4.0.3"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-camera": {}
+        }
+    }
 }

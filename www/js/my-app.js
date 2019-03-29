@@ -276,30 +276,41 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   console.log(userEmail)
   var user = {}
 
-    var UserGet = db.collection("users").doc(userEmail);
-    UserGet.get()
-      .then(function (doc) {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-          $$('#cuenta-name').text(doc.data().name);
-          $$('#cuenta-email').text(userEmail);
-          if(doc.data().img){
-            $$('#cuenta-img').attr('src', doc.data().img);
-          } else {
-            $$('#cuenta-img').attr('src', 'https://i.imgur.com/oI9j9pR.jpg');
-          }
+  var UserGet = db.collection("users").doc(userEmail);
+  // Set attr to start
+  UserGet.get()
+    .then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        $$('#cuenta-name').text(doc.data().name);
+        $$('#cuenta-email').text(userEmail);
+        if (doc.data().img) {
+          $$('#cuenta-img').attr('src', doc.data().img);
         } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
+          $$('#cuenta-img').attr('src', 'https://i.imgur.com/oI9j9pR.jpg');
         }
-      })
-      .catch(function (error) {
-        console.log("Error getting document:", error);
-      });
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    })
+    .catch(function (error) {
+      console.log("Error getting document:", error);
+    });
 
+  navigator.camera.getPicture(onSuccess, onFail, {
+    quality: 50,
+    destinationType: Camera.DestinationType.FILE_URI
+  });
 
+  function onSuccess(imageURI) {
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
+  }
 
-
+  function onFail(message) {
+    alert('Failed because: ' + message);
+  }
 
 })
 
