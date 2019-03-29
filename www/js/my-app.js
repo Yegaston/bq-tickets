@@ -298,14 +298,19 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       console.log("Error getting document:", error);
     });
 
-  navigator.camera.getPicture(onSuccess, onFail, {
-    quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI
+  $('#cuenta-img-button').click(function (e) {
+    e.preventDefault();
+    console.log("Opening Camera??");
+    navigator.camera.getPicture(onSuccess, onFail, {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI
+    });
   });
 
   function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
+    console.log(imageURI);
   }
 
   function onFail(message) {
