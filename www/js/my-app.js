@@ -277,6 +277,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   var user = {}
 
   var UserGet = db.collection("users").doc(userEmail);
+  var storageRef = firebase.storage().ref();
 
   // Set attr to start
   UserGet.get()
@@ -313,6 +314,8 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     image.src = imageURI;
     $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
+    var ProfilePhoto = storageRef.child(imageURI);
+    ProfilePhoto.put()
 
   }
 
