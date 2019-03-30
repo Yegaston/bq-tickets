@@ -277,6 +277,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   var user = {}
 
   var UserGet = db.collection("users").doc(userEmail);
+
   // Set attr to start
   UserGet.get()
     .then(function (doc) {
@@ -310,7 +311,9 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
+    $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
+
   }
 
   function onFail(message) {
