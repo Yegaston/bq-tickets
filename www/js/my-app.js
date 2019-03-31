@@ -309,6 +309,13 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     });
   });
 
+  var toastSuccesUpdate = app.toast.create({
+    text: 'Cuenta actualizada!. :)',
+    position: 'top',
+    closeTimeout: 2000,
+  });
+
+  // Success callback function when photo is correct taken
   function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
@@ -319,9 +326,44 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
   }
 
+  // Error photo when is failed the photo taken.
   function onFail(message) {
     alert('Failed because: ' + message);
   }
+
+
+
+  function SaveDataInUser(userID){
+    var userToUpdate = db.collection("users").doc(userID);
+
+    console.log(userID);
+
+    const dataToPush = {
+      userTel: $$('#userTel').val(),
+      userDireccion: $$('#userDireccion').val()
+    }
+
+    return userToUpdate.update({
+      userTel: dataToPush.userTel,
+      userDireccion: dataToPush.userDireccion
+    })
+      .then(function(){
+        console.log("Camps added");
+        $$('#userTel').val(dataToPush.userTel);
+        $$('#userDireccion').val(dataToPush.userDireccion);
+        toastSuccesUpdate.open()
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    console.log(dataToPush)
+  }
+
+  $$('#sendDataCuenta').click(function (e) { 
+    e.preventDefault();
+    SaveDataInUser(userEmail);
+    
+  });
 
 })
 
