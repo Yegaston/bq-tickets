@@ -156,10 +156,10 @@ class emailProvider {
               .then(function () {
                 console.log("Camp added")
                 console.log(eventoID)
-                
-            $$('.open-toast-top').on('click', function () {
-              toastTop.open();
-            });
+
+                $$('.open-toast-top').on('click', function () {
+                  toastTop.open();
+                });
 
               })
               .catch(function (err) {
@@ -194,19 +194,66 @@ class emailProvider {
         // console.log(doc.id, " => ", doc.data());
 
         $$('#feed-container').append(`
-          <div class="card demo-card-header-pic">
-            <div style="background-image:url(${doc.data().foto})"
-              class="card-header align-items-flex-end">${doc.data().title}</div>
-            <div>
-                <!-- Aca va la parte del organizador. -->
+          <div>
+            <div class="card demo-card-header-pic">
+              <div style="background-image:url(${doc.data().foto})"
+                class="card-header align-items-flex-end">${doc.data().title}</div>
+              <div>
+                  <!-- Aca va la parte del organizador. -->
+              </div>
+              <div class="card-content card-content-padding">
+                <p class="date">El evento es: ${doc.data().Dia}</p>
+                <p>${doc.data().descrip}. Organizador: <span><b>${doc.data().organizador}</b></span></p>
+              </div>
+              <div class="card-footer">
+                <a class="link popup-open" data-popup=".popup-${doc.id}" >Mas info</a>
+                <a href="#" class="link open-toast-top" onclick="emailProvider.asistirButton('${doc.id}', '${userEmail}')">Asistir</a>
+              </div>
             </div>
-            <div class="card-content card-content-padding">
-              <p class="date">El evento es: ${doc.data().Dia}</p>
-              <p>${doc.data().descrip}. Organizador: <span><b>${doc.data().organizador}</b></span></p>
+
+              <div class="popup popup-${doc.id}">
+                <div class="block">
+                  <h1>${doc.data().title}</h1>
+                  <!-- Close Popup -->
+                  <p><a class="link popup-close" href="#">Volver a atras.</a></p>
+                  <p>${doc.data().descrip}</p>
+
+                  <div class="block-title">Entradas y tipos.</div>
+                  <div class="list accordion-list">
+                    <ul id="carrousel-${doc.id}">
+
+                    </ul>
+                  </div>
+                  
+              </div>
             </div>
-            <div class="card-footer"><a class="link sheet-open" data-sheet=".my-sheet" >Mas info</a><a href="#" class="link open-toast-top" onclick="emailProvider.asistirButton('${doc.id}', '${userEmail}')">Asistir</a></div>
           </div>
   `);
+
+        for (let i = 0; i < doc.data().tipoDeEntrada.length; i++) {
+          const element = doc.data().tipoDeEntrada[i];
+          $$(`#carrousel-${doc.id}`).append(`
+          <li class="accordion-item">
+            <a href="#" class="item-content item-link">
+              <div class="item-inner">
+                <div class="item-title">${element}</div>
+              </div>
+            </a>
+            <div class="accordion-item-content">
+              <div class="block boleteria-${doc.id}">
+
+              </div>
+            </div>
+          </li>
+        `);
+        }
+
+        doc.data().boleterias.forEach(function (boleteria) {
+          $$(`.boleteria-${doc.id}`).append(`
+            <p><a href="${boleteria}">${boleteria}</a></p>
+        `);
+        })
+
       });
     });
 
@@ -268,7 +315,7 @@ class emailProvider {
     });
   }
 
-  cuentaUserData(){
+  cuentaUserData() {
     var doc = emailProvider.getUserByEmail('messi@barcelona.com');
     console.log(doc)
   }
