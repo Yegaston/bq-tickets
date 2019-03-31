@@ -16,20 +16,20 @@
         </div>
 
         <div class="row ">
-            <img class="avatar-image col-33 avatar-cuenta"
+            <img id="cuenta-img" class="avatar-image col-33 avatar-cuenta"
                 src="https://avatars0.githubusercontent.com/u/39235181?s=400&u=4ff08dddcad345a00904f3d7cf18cf4c40de5816&v=4"
                 alt="Profile Image">
             <div class="col-66 display-flex">
                 <div>
-                    <h4 class="font-18-cuenta">Gaston Graciani</h4>
-                    <h4 class="font-14-cuenta">Email@email.com</h4>
+                    <h4 id="cuenta-name" class="font-18-cuenta">Gaston Graciani</h4>
+                    <h4 id="cuenta-email" class="font-14-cuenta">Email@email.com</h4>
                 </div>
             </div>
         </div>
 
         <div class="row display-flex justify-content-center padding-vertical">
                 <div class="col-50  align-content-center">
-                    <button class="button button-fill color-green ">Subir Foto</button>
+                    <button id="cuenta-img-button" class="button button-fill color-green ">Subir Foto</button>
     
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <li class="item-content item-input item-input-with-info">
                     <div class="item-inner">
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="Numero de telefono.">
+                            <input id="userTel" type="text" placeholder="Numero de telefono.">
                             <span class="input-clear-button"></span>
                             <div class="item-input-info">Ejemplo: 341323432</div>
                         </div>
@@ -48,7 +48,7 @@
                 <li class="item-content item-input item-input-with-info">
                     <div class="item-inner">
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="Direccion">
+                            <input id="userDireccion" type="text" placeholder="Direccion">
                             <span class="input-clear-button"></span>
                             <div class="item-input-info">Click en el icono para detectarla automaticamente.</div>
                         </div>
@@ -58,7 +58,7 @@
             </ul>
             <div class="row display-flex justify-content-center padding-vertical">
                     <div class="col-50  align-content-center">
-                        <button class="button button-fill color-blue ">Guardar</button>
+                        <button id="sendDataCuenta" class="button button-fill color-blue ">Guardar</button>
         
                     </div>
                 </div>
@@ -71,16 +71,11 @@
             </div>
         </div>
 
-    </div>
+        <div id="myImage">
 
-    <div class="panel panel-left panel-reveal">
-        <div class="block">
-            <p>{{El usuario}}</p>
-            <p><a class="panel-open" href="/index/">Inicio</a></p>
-            <p><a class="panel-open" href="#" data-panel="right">Asistire</a></p>
-            <p><a class="panel-open color-gray" href="#" data-panel="right">Amigos</a></p>
-            <p><a class="panel-close color-gray" href="#" data-panel="right">Cuenta</a></p>
+            
         </div>
+
     </div>
 
 

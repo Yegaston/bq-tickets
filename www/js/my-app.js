@@ -272,9 +272,98 @@ $$(document).on('page:init', '.page[data-name="main-screen"]', function (e) {
 // ###########
 $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
-  var usuario = emailProvider.getUserByEmail(userEmail);
-  // console.log(usuario);
+  var db = firebase.firestore();
+  console.log(userEmail)
+  var user = {}
 
+  var UserGet = db.collection("users").doc(userEmail);
+  // var storageRef = firebase.storage().ref();
+
+  // Set attr to start
+  UserGet.get()
+    .then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        $$('#cuenta-name').text(doc.data().name);
+        $$('#cuenta-email').text(userEmail);
+        if (doc.data().img) {
+          $$('#cuenta-img').attr('src', doc.data().img);
+        } else {
+          $$('#cuenta-img').attr('src', 'https://i.imgur.com/oI9j9pR.jpg');
+        }
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    })
+    .catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+
+  $$('#cuenta-img-button').click(function (e) {
+    e.preventDefault();
+    console.log("Opening Camera??");
+    navigator.camera.getPicture(onSuccess, onFail, {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI
+    });
+  });
+
+  var toastSuccesUpdate = app.toast.create({
+    text: 'Cuenta actualizada!. :)',
+    position: 'top',
+    closeTimeout: 2000,
+  });
+
+  // Success callback function when photo is correct taken
+  function onSuccess(imageURI) {
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
+    $$('#cuenta-img').attr('src', imageURI);
+    console.log(imageURI);
+    // var ProfilePhoto = storageRef.child(imageURI);
+    // ProfilePhoto.put()
+
+  }
+
+  // Error photo when is failed the photo taken.
+  function onFail(message) {
+    alert('Failed because: ' + message);
+  }
+
+
+
+  function SaveDataInUser(userID){
+    var userToUpdate = db.collection("users").doc(userID);
+
+    console.log(userID);
+
+    const dataToPush = {
+      userTel: $$('#userTel').val(),
+      userDireccion: $$('#userDireccion').val()
+    }
+
+    return userToUpdate.update({
+      userTel: dataToPush.userTel,
+      userDireccion: dataToPush.userDireccion
+    })
+      .then(function(){
+        console.log("Camps added");
+        $$('#userTel').val(dataToPush.userTel);
+        $$('#userDireccion').val(dataToPush.userDireccion);
+        toastSuccesUpdate.open()
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    console.log(dataToPush)
+  }
+
+  $$('#sendDataCuenta').click(function (e) { 
+    e.preventDefault();
+    SaveDataInUser(userEmail);
+    
+  });
 
 })
 
