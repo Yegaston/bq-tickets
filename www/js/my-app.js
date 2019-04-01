@@ -33,11 +33,6 @@ var app = new Framework7({
       url: 'login-screen.html'
     },
     {
-      name: 'evento',
-      path: '/evento/',
-      url: 'evento.html'
-    },
-    {
       name: 'register',
       path: '/register/',
       url: 'register.html'
@@ -66,6 +61,11 @@ var app = new Framework7({
       name: 'welcome',
       path: '/welcome/',
       url: 'welcome.html'
+    },
+    {
+      name: 'asistir',
+      path: '/asistir/',
+      url: 'asistir.html'
     },
   ],
   // ... other parameters
@@ -96,7 +96,7 @@ $$(document).on('deviceready', function () {
 
 // EMAIL DE LA SESION
 
-var userEmail = '';
+var userEmail = 'messi@barcelona.com';
 var userTags = [];
 
 
@@ -320,10 +320,10 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     image.src = imageURI;
     $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
-    
+
 
     storageRef.put(imageURI)
-    
+
     // let task = storageRef.put(imageURI)
     // task.on('state_changed', function(snapshot){
     //   let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -347,7 +347,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
 
 
-  function SaveDataInUser(userID){
+  function SaveDataInUser(userID) {
     var userToUpdate = db.collection("users").doc(userID);
 
     console.log(userID);;
@@ -361,22 +361,22 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       userTel: dataToPush.userTel,
       userDireccion: dataToPush.userDireccion
     })
-      .then(function(){
+      .then(function () {
         console.log("Camps added");
         $$('#userTel').val(dataToPush.userTel);
         $$('#userDireccion').val(dataToPush.userDireccion);
         toastSuccesUpdate.open()
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err)
       })
     console.log(dataToPush)
   }
 
-  $$('#sendDataCuenta').click(function (e) { 
+  $$('#sendDataCuenta').click(function (e) {
     e.preventDefault();
     SaveDataInUser(userEmail);
-    
+
   });
 
 })
@@ -407,4 +407,43 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
     });
   });
 
+})
+
+// ##########
+// ASISTIR SCREEN
+// #########
+
+$$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
+  var db = firebase.firestore();
+  var UserGet = db.collection("users").doc(userEmail);
+
+
+  UserGet.get()
+    .then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        if (doc.data().Asistir) {
+          console.log("Hey, existo!")
+          for (let i = 0; i < doc.data().Asistir.length; i++) {
+            const eventoID = doc.data().Asistir[i];
+            db.collection("eventos").doc(eventoID)
+              .then(function(UserEvent){
+                console.log('dentro e la promesa')
+                console.log('Ultimo' , UserEvent.data().title);
+              })
+              .catch(function(err){
+                console.log(err)
+              })
+            
+          }
+        } else {
+          console.log("El usuario no tiene eventos guardados en asistir.");
+        }
+      } else {
+        console.log("Doc not found")
+      }
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
 })
