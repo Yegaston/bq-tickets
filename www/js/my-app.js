@@ -277,8 +277,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   var user = {}
 
   var UserGet = db.collection("users").doc(userEmail);
-  var storageRef = firebase.storage().ref();
-
+  const storageRef = firebase.storage().ref(`/${userEmail}/profileImage`);
   // Set attr to start
   UserGet.get()
     .then(function (doc) {
@@ -321,11 +320,14 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     image.src = imageURI;
     $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
-    var userProfileImage = storageRef.child(`user/profile/image.jpg`);
-    userProfileImage.put(File)
-      .then(function (snapshot) { 
-        console.log("Uploaded file");
-       })
+    
+    storageRef.put(imageURI)
+      .then(function(snapshot){
+        console.log("Photo uploaded??")
+      })
+      .catch(function(err){
+        console.log(err);
+      })
  
   }
 
