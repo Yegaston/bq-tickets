@@ -321,19 +321,22 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
     
-    let task = storageRef.put(imageURI)
-    task.on('state_changed', function(snapshot){
-      let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      console.log(percentaje)
 
-    },
-    function(err){
-      console.log(err)
-    },
-    function(){
-      console.log(task.snapshot.downloadURL)
-    }
-    )
+    storageRef.put(imageURI)
+    
+    // let task = storageRef.put(imageURI)
+    // task.on('state_changed', function(snapshot){
+    //   let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //   console.log(percentaje)
+
+    // },
+    // function(err){
+    //   console.log(err)
+    // },
+    // function(){
+    //   console.log(task.snapshot.downloadURL)
+    // }
+    // )
 
   }
 
