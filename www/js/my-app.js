@@ -277,7 +277,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   var user = {}
 
   var UserGet = db.collection("users").doc(userEmail);
-  // var storageRef = firebase.storage().ref();
+  var storageRef = firebase.storage().ref();
 
   // Set attr to start
   UserGet.get()
@@ -321,9 +321,12 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     image.src = imageURI;
     $$('#cuenta-img').attr('src', imageURI);
     console.log(imageURI);
-    // var ProfilePhoto = storageRef.child(imageURI);
-    // ProfilePhoto.put()
-
+    var userProfileImage = storageRef.child(`user/profile/image.jpg`);
+    userProfileImage.put(File)
+      .then(function (snapshot) { 
+        console.log("Uploaded file");
+       })
+ 
   }
 
   // Error photo when is failed the photo taken.
@@ -336,7 +339,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   function SaveDataInUser(userID){
     var userToUpdate = db.collection("users").doc(userID);
 
-    console.log(userID);
+    console.log(userID);;
 
     const dataToPush = {
       userTel: $$('#userTel').val(),
