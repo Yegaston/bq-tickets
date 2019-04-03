@@ -285,6 +285,13 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
         console.log("Document data:", doc.data());
         $$('#cuenta-name').text(doc.data().name);
         $$('#cuenta-email').text(userEmail);
+        doc.data().tags.forEach(function (tag) { 
+          $$('#cuenta-tags').append(` 
+          <div id="${tag}" class="chip chip-outline">
+            <div class="chip-label">${tag}</div>
+          </div>
+        `);
+         })
         if (doc.data().img) {
           $$('#cuenta-img').attr('src', doc.data().img);
         } else {
@@ -344,8 +351,6 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   function onFail(message) {
     alert('Failed because: ' + message);
   }
-
-
 
   function SaveDataInUser(userID) {
     var userToUpdate = db.collection("users").doc(userID);
