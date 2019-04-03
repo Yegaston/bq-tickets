@@ -216,6 +216,7 @@ $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
   }
 
 })
+
 // ###########
 // Register done
 // ###########
@@ -430,7 +431,7 @@ $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
         if (doc.data().Asistir) {
           console.log("Hey, existo!")
           for (let i = 0; i < doc.data().Asistir.length; i++) {
-            const eventoID = doc.data().Asistir[i];
+            var eventoID = doc.data().Asistir[i];
             db.collection("eventos").doc(eventoID)
               .then(function(UserEvent){
                 console.log('dentro e la promesa')
