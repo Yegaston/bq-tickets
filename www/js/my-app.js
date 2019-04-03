@@ -216,6 +216,7 @@ $$(document).on('page:init', '.page[data-name="evento"]', function (e) {
   }
 
 })
+
 // ###########
 // Register done
 // ###########
@@ -285,6 +286,13 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
         console.log("Document data:", doc.data());
         $$('#cuenta-name').text(doc.data().name);
         $$('#cuenta-email').text(userEmail);
+        doc.data().tags.forEach(function (tag) { 
+          $$('#cuenta-tags').append(` 
+          <div id="${tag}" class="chip chip-outline">
+            <div class="chip-label">${tag}</div>
+          </div>
+        `);
+         })
         if (doc.data().img) {
           $$('#cuenta-img').attr('src', doc.data().img);
         } else {
@@ -344,8 +352,6 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
   function onFail(message) {
     alert('Failed because: ' + message);
   }
-
-
 
   function SaveDataInUser(userID) {
     var userToUpdate = db.collection("users").doc(userID);
@@ -416,32 +422,32 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
 $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
   var db = firebase.firestore();
   var UserGet = db.collection("users").doc(userEmail);
-
+  var EventsIds = []
 
   UserGet.get()
     .then(function (doc) {
       if (doc.exists) {
         console.log("Document data:", doc.data());
+
         if (doc.data().Asistir) {
           console.log("Hey, existo!")
-          for (let i = 0; i < doc.data().Asistir.length; i++) {
-            const eventoID = doc.data().Asistir[i];
-            db.collection("eventos").doc(eventoID)
-              .then(function(UserEvent){
-                console.log('dentro e la promesa')
-                console.log('Ultimo' , UserEvent.data().title);
-              })
-              .catch(function(err){
-                console.log(err)
-              })
-            
-          }
+          EventsIds = doc.data().Asistir
         } else {
           console.log("El usuario no tiene eventos guardados en asistir.");
         }
       } else {
         console.log("Doc not found")
       }
+      EventsIds.forEach(function (EventId) { 
+        console.log(EventId);
+        db.collection("eventos").doc(EventId).get()
+          .then(function(event) {
+            console.log(event.data());
+          })
+          .catch(function(err){
+            console.log(err);
+          })
+       })
     })
     .catch(function (err) {
       console.log(err)
