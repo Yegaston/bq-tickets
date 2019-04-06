@@ -96,7 +96,7 @@ $$(document).on('deviceready', function () {
 
 // EMAIL DE LA SESION
 
-var userEmail = 'messi@barcelona.com';
+var userEmail = '';
 var userTags = [];
 
 
