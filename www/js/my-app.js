@@ -96,7 +96,11 @@ $$(document).on('deviceready', function () {
 
 // EMAIL DE LA SESION
 
+<<<<<<< HEAD
 var userEmail = '';
+=======
+var userEmail = 'eddievedder@gmail.com';
+>>>>>>> EventNav
 var userTags = [];
 
 
@@ -286,13 +290,13 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
         console.log("Document data:", doc.data());
         $$('#cuenta-name').text(doc.data().name);
         $$('#cuenta-email').text(userEmail);
-        doc.data().tags.forEach(function (tag) { 
+        doc.data().tags.forEach(function (tag) {
           $$('#cuenta-tags').append(` 
           <div id="${tag}" class="chip chip-outline">
             <div class="chip-label">${tag}</div>
           </div>
         `);
-         })
+        })
         if (doc.data().img) {
           $$('#cuenta-img').attr('src', doc.data().img);
         } else {
@@ -316,11 +320,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     });
   });
 
-  var toastSuccesUpdate = app.toast.create({
-    text: 'Cuenta actualizada!. :)',
-    position: 'top',
-    closeTimeout: 2000,
-  });
+  
 
   // Success callback function when photo is correct taken
   function onSuccess(imageURI) {
@@ -332,19 +332,19 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
     storageRef.put(imageURI)
 
-    // let task = storageRef.put(imageURI)
-    // task.on('state_changed', function(snapshot){
-    //   let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //   console.log(percentaje)
+    let task = storageRef.put(imageURI)
+    task.on('state_changed', function(snapshot){
+      let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      console.log(percentaje)
 
-    // },
-    // function(err){
-    //   console.log(err)
-    // },
-    // function(){
-    //   console.log(task.snapshot.downloadURL)
-    // }
-    // )
+    },
+    function(err){
+      console.log(err)
+    },
+    function(){
+      console.log(task.snapshot.downloadURL)
+    }
+    )
 
   }
 
@@ -378,7 +378,12 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       })
     console.log(dataToPush)
   }
-
+  
+  var toastSuccesUpdate = app.toast.create({
+    text: 'Cuenta actualizada!. :)',
+    position: 'top',
+    closeTimeout: 2000,
+  });
   $$('#sendDataCuenta').click(function (e) {
     e.preventDefault();
     SaveDataInUser(userEmail);
@@ -434,20 +439,45 @@ $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
           EventsIds = doc.data().Asistir
         } else {
           console.log("El usuario no tiene eventos guardados en asistir.");
+          $$('#eventos-asistir').append(`
+            <div class="display-flex row">
+              <div class="row">
+                <h5>Ups... Aparentemente no tienes ningun proximo evento :( .</h5>
+              </div>
+              <div class="">
+                <i class="f7-icons ios-only excl-icon">info</i>
+                <i class="material-icons ios-only excl-icon">info</i>
+              </div>
+                <div class="row"> 
+                  <h5> Por que no buscas algo para hacer! </h5>
+                </div>
+            </div>
+          `)
         }
       } else {
         console.log("Doc not found")
       }
-      EventsIds.forEach(function (EventId) { 
+      EventsIds.forEach(function (EventId) {
         console.log(EventId);
         db.collection("eventos").doc(EventId).get()
-          .then(function(event) {
-            console.log(event.data());
+          .then(function (event) {
+            $$('#eventos-asistir').append(`
+            <div class="card demo-card-header-pic">
+                <div style="background-image:url(${event.data().foto})" class="card-header align-items-flex-end">
+                  ${event.data().title}
+                </div>
+                <div class="card-content card-content-padding">
+                    <p> ${event.data().descrip} el dia ${event.data().Dia} a las ${event.data().hora} en ${event.data().lugar}
+                </div>
+                <div class="card-footer"><a href="#" class="link">De-asistir</a>
+                </div>
+            </div>
+            `);
           })
-          .catch(function(err){
+          .catch(function (err) {
             console.log(err);
           })
-       })
+      })
     })
     .catch(function (err) {
       console.log(err)
