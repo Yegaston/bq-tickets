@@ -96,11 +96,7 @@ $$(document).on('deviceready', function () {
 
 // EMAIL DE LA SESION
 
-<<<<<<< HEAD
 var userEmail = '';
-=======
-var userEmail = 'eddievedder@gmail.com';
->>>>>>> EventNav
 var userTags = [];
 
 
