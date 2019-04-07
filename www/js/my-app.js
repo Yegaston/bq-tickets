@@ -316,11 +316,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     });
   });
 
-  var toastSuccesUpdate = app.toast.create({
-    text: 'Cuenta actualizada!. :)',
-    position: 'top',
-    closeTimeout: 2000,
-  });
+  
 
   // Success callback function when photo is correct taken
   function onSuccess(imageURI) {
@@ -332,19 +328,19 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
     storageRef.put(imageURI)
 
-    // let task = storageRef.put(imageURI)
-    // task.on('state_changed', function(snapshot){
-    //   let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //   console.log(percentaje)
+    let task = storageRef.put(imageURI)
+    task.on('state_changed', function(snapshot){
+      let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      console.log(percentaje)
 
-    // },
-    // function(err){
-    //   console.log(err)
-    // },
-    // function(){
-    //   console.log(task.snapshot.downloadURL)
-    // }
-    // )
+    },
+    function(err){
+      console.log(err)
+    },
+    function(){
+      console.log(task.snapshot.downloadURL)
+    }
+    )
 
   }
 
@@ -378,7 +374,12 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       })
     console.log(dataToPush)
   }
-
+  
+  var toastSuccesUpdate = app.toast.create({
+    text: 'Cuenta actualizada!. :)',
+    position: 'top',
+    closeTimeout: 2000,
+  });
   $$('#sendDataCuenta').click(function (e) {
     e.preventDefault();
     SaveDataInUser(userEmail);
