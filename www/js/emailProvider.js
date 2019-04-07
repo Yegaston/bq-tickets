@@ -212,10 +212,23 @@ class emailProvider {
             </div>
 
               <div class="popup popup-${doc.id}">
-                <div class="block">
+                
+                  <div class="navbar">
+                    <div class="navbar-inner">
+                      <div class="left">
+                          <a href="#" data-panel="left" class="panel-open"><i class="f7-icons">icon-bars</i></a>
+
+                      </div>
+                    <div class="title">Inicio</div>
+                    <div class="right">
+                      <a href="#" class="link  popup-close"><i class="f7-icons">arrow_down</i></a>
+                      </div>
+                  </div>
+              </div>
+              <div class="block">
                   <h1>${doc.data().title}</h1>
                   <!-- Close Popup -->
-                  <p><a class="link popup-close" href="#">Volver a atras.</a></p>
+                  
                   <p>${doc.data().descrip}</p>
 
                   <div class="block-title">Entradas y tipos.</div>
