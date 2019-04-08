@@ -316,7 +316,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     });
   });
 
-  
+
 
   // Success callback function when photo is correct taken
   function onSuccess(imageURI) {
@@ -329,17 +329,17 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     storageRef.put(imageURI)
 
     let task = storageRef.put(imageURI)
-    task.on('state_changed', function(snapshot){
+    task.on('state_changed', function (snapshot) {
       let percentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       console.log(percentaje)
 
     },
-    function(err){
-      console.log(err)
-    },
-    function(){
-      console.log(task.snapshot.downloadURL)
-    }
+      function (err) {
+        console.log(err)
+      },
+      function () {
+        console.log(task.snapshot.downloadURL)
+      }
     )
 
   }
@@ -374,7 +374,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
       })
     console.log(dataToPush)
   }
-  
+
   var toastSuccesUpdate = app.toast.create({
     text: 'Cuenta actualizada!. :)',
     position: 'top',
@@ -395,18 +395,31 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
   const amigos = ['Luis Suarez', 'Ousmane Dembele', 'Samuel Umtiti', 'Rafinha', 'Nelson Semedo']
 
+
+
   amigos.forEach(amigo => {
     $$('#contactos').append(
       `<li>
         <div class="item-content">
-          <div class="item-inner">
-            <div id="${amigo}" class="item-title">${amigo}</div>
-          </div>
+          <a href="#" data-popup=".chat" class="popup-open chatscreen">
+            <div class="item-inner display-flex justify-content-space-between align-items-flex-start">
+              <div id="${amigo}" class="item-title flex-shrink-0">
+                <span class="friendUser">${amigo}</span> <span class="align-self-flex-end"><i class="f7-icons size-22">chat</i></span>
+                
+              </div>
+            </div>
+          </a>
         </div>
       </li>`
     );
   });
 
+
+  $$('.chatscreen').click(function (e) {
+    e.preventDefault();
+    const user = $$('.friendUser').text()
+    $$('.chatWith').text(user);
+  });
   amigos.forEach(amigo => {
     $$(`#${amigo}`).click(function (e) {
       e.preventDefault();
