@@ -279,7 +279,8 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
   var UserGet = db.collection("users").doc(userEmail);
   const storageRef = firebase.storage().ref(`/${userEmail}/profileImage`);
-  // Set attr to start
+  
+  // Set attr to start (Trae los datos del usuario y  los imprime en pantalla)
   UserGet.get()
     .then(function (doc) {
       if (doc.exists) {
@@ -380,6 +381,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     position: 'top',
     closeTimeout: 2000,
   });
+
   $$('#sendDataCuenta').click(function (e) {
     e.preventDefault();
     SaveDataInUser(userEmail);
