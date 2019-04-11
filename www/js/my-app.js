@@ -403,10 +403,12 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
     $$('#contactos').append(
       `<li>
         <div class="item-content">
-          <a href="#" data-popup=".chat" class="popup-open chatscreen">
+          <a href="#" data-popup=".chat" class="popup-open chatscreen" style="width:96%">
             <div class="item-inner display-flex justify-content-space-between align-items-flex-start">
               <div id="${amigo}" class="item-title flex-shrink-0">
-                <span class="friendUser">${amigo}</span> <span class="align-self-flex-end"><i class="f7-icons size-22">chat</i></span>
+                <div class="align-self-flex-end"  style="float:right;"><i class="f7-icons size-22">chat</i></div>
+                <div class="friendUser" style="width: 96vw;">${amigo}</div>
+                
                 
               </div>
             </div>
