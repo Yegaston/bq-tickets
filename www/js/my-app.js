@@ -394,6 +394,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 // ###########
 // AMIGOS SCREEN
 // ###########
+
 $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
   const amigos = ['Luis Suarez', 'Ousmane Dembele', 'Samuel Umtiti', 'Rafinha', 'Nelson Semedo']
 
@@ -402,8 +403,8 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
   amigos.forEach(amigo => {
     $$('#contactos').append(
       `<li>
-        <div class="item-content">
-          <a href="#" data-popup=".chat" class="popup-open chatscreen">
+        <div data-popup=".chatPop" class="item-content popup-open" onclick="openPopup('${amigo}')">
+          <a href="#"  class="chatscreen">
             <div class="item-inner display-flex justify-content-space-between align-items-flex-start">
               <div id="${amigo}" class="item-title flex-shrink-0">
                 <span class="friendUser">${amigo}</span> <span class="align-self-flex-end"><i class="f7-icons size-22">chat</i></span>
@@ -412,22 +413,18 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
             </div>
           </a>
         </div>
-      </li>`
+      </li>
+      `
     );
   });
 
 
-  $$('.chatscreen').click(function (e) {
-    e.preventDefault();
-    const user = $$('.friendUser').text()
-    $$('.chatWith').text(user);
-  });
-  amigos.forEach(amigo => {
-    $$(`#${amigo}`).click(function (e) {
-      e.preventDefault();
-      console.log(amigo)
-    });
-  });
+
+  // $$('.chatscreen').click(function (e) {
+  //   e.preventDefault();
+  //   const user = $$('.friendUser').text()
+  //   $$('.chatWith').text(user);
+  // });
 
 })
 
@@ -440,17 +437,18 @@ $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
   var UserGet = db.collection("users").doc(userEmail);
   var EventsIds = []
 
-  UserGet.get()
-    .then(function (doc) {
-      if (doc.exists) {
-        console.log("Document data:", doc.data());
+  function PrintUsers() {
+    UserGet.get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
 
-        if (doc.data().Asistir) {
-          console.log("Hey, existo!")
-          EventsIds = doc.data().Asistir
-        } else {
-          console.log("El usuario no tiene eventos guardados en asistir.");
-          $$('#eventos-asistir').append(`
+          if (doc.data().Asistir) {
+            console.log("Hey, existo!")
+            EventsIds = doc.data().Asistir
+          } else {
+            console.log("El usuario no tiene eventos guardados en asistir.");
+            $$('#eventos-asistir').append(`
             <div class="display-flex row">
               <div class="row">
                 <h5>Ups... Aparentemente no tienes ningun proximo evento :( .</h5>
@@ -464,15 +462,15 @@ $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
                 </div>
             </div>
           `)
+          }
+        } else {
+          console.log("Doc not found")
         }
-      } else {
-        console.log("Doc not found")
-      }
-      EventsIds.forEach(function (EventId) {
-        console.log(EventId);
-        db.collection("eventos").doc(EventId).get()
-          .then(function (event) {
-            $$('#eventos-asistir').append(`
+        EventsIds.forEach(function (EventId) {
+          console.log(EventId);
+          db.collection("eventos").doc(EventId).get()
+            .then(function (event) {
+              $$('#eventos-asistir').append(`
             <div class="card demo-card-header-pic">
                 <div style="background-image:url(${event.data().foto})" class="card-header align-items-flex-end">
                   ${event.data().title}
@@ -480,17 +478,67 @@ $$(document).on('page:init', '.page[data-name="asistir"]', function (e) {
                 <div class="card-content card-content-padding">
                     <p> ${event.data().descrip} el dia ${event.data().Dia} a las ${event.data().hora} en ${event.data().lugar}
                 </div>
-                <div class="card-footer"><a href="#" class="link">De-asistir</a>
+                <div class="card-footer"><a href="#" class="link" onclick="deasistir('${EventId}')">De-asistir</a>
                 </div>
             </div>
             `);
-          })
-          .catch(function (err) {
-            console.log(err);
-          })
+            })
+            .catch(function (err) {
+              console.log(err);
+            })
+        })
       })
+      .catch(function (err) {
+        console.log(err)
+      })
+  }
+  PrintUsers();
+
+
+
+
+
+})
+function openPopup(amigo) {
+  console.log(amigo);
+  // const chatPop = $$('.chatPop')
+  $$('.chatWith').text(amigo);
+
+
+}
+
+function deasistir(ID) {
+  var db = firebase.firestore();
+  var UserGet = db.collection("users").doc(userEmail);
+
+  UserGet.get()
+    .then(function (doc) {
+      console.log("El id es ", ID)
+
+      var asistir = doc.data().Asistir
+
+      var newAsistir = removeItemFromArr(asistir, ID);
+
+      return UserGet.update({
+        Asistir: newAsistir,
+      })
+        .then(function () {
+          console.log("Update");
+          location.reload();
+        })
+        .catch(function (err) {
+          console.log(err)
+        })
+
+
     })
     .catch(function (err) {
-      console.log(err)
+      console.log(err);
     })
-})
+}
+
+function removeItemFromArr(arr, item) {
+  return arr.filter(function (e) {
+    return e !== item;
+  });
+};
