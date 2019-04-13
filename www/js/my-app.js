@@ -509,6 +509,17 @@ function deasistir(ID) {
   var db = firebase.firestore();
   var UserGet = db.collection("users").doc(userEmail);
 
+
+  var DeasistirToast = app.toast.create({
+    text: 'Has dejado de asistir a este evento :( (Vuelve al inicio para ver cambios)',
+    closeButton: true,
+    on: {
+      close: function () {
+        app.dialog.alert('Por favor vuelve al inicio para ver reflejado los cambios. ');
+      },
+    }
+  });
+
   UserGet.get()
     .then(function (doc) {
       console.log("El id es ", ID)
@@ -522,7 +533,7 @@ function deasistir(ID) {
       })
         .then(function () {
           console.log("Update");
-          location.reload();
+          DeasistirToast.open();
         })
         .catch(function (err) {
           console.log(err)
