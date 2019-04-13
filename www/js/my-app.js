@@ -158,8 +158,6 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   console.log(e);
   console.log("Login Page Loaded")
   $$('#login-button').click(function (e) {
-    console.log("login-button");
-
     var email = $$('#login-email').val();
     var password = $$('#login-password').val();
     emailProvider.login(email, password);
