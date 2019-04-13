@@ -96,7 +96,7 @@ $$(document).on('deviceready', function () {
 
 // EMAIL DE LA SESION
 
-var userEmail = 'eddievedder@gmail.com';
+var userEmail = '';
 var userTags = [];
 
 
@@ -158,8 +158,6 @@ $$(document).on('page:init', '.page[data-name="login-screen"]', function (e) {
   console.log(e);
   console.log("Login Page Loaded")
   $$('#login-button').click(function (e) {
-    console.log("login-button");
-
     var email = $$('#login-email').val();
     var password = $$('#login-password').val();
     emailProvider.login(email, password);
@@ -279,7 +277,8 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
 
   var UserGet = db.collection("users").doc(userEmail);
   const storageRef = firebase.storage().ref(`/${userEmail}/profileImage`);
-  // Set attr to start
+  
+  // Set attr to start (Trae los datos del usuario y  los imprime en pantalla)
   UserGet.get()
     .then(function (doc) {
       if (doc.exists) {
@@ -380,6 +379,7 @@ $$(document).on('page:init', '.page[data-name="cuenta"]', function (e) {
     position: 'top',
     closeTimeout: 2000,
   });
+
   $$('#sendDataCuenta').click(function (e) {
     e.preventDefault();
     SaveDataInUser(userEmail);
@@ -401,11 +401,13 @@ $$(document).on('page:init', '.page[data-name="amigos"]', function (e) {
   amigos.forEach(amigo => {
     $$('#contactos').append(
       `<li>
-        <div data-popup=".chatPop" class="item-content popup-open" onclick="openPopup('${amigo}')">
+        <div data-popup=".chatPop" class="item-content popup-open" style="width:96%" onclick="openPopup('${amigo}')">
           <a href="#"  class="chatscreen">
             <div class="item-inner display-flex justify-content-space-between align-items-flex-start">
               <div id="${amigo}" class="item-title flex-shrink-0">
-                <span class="friendUser">${amigo}</span> <span class="align-self-flex-end"><i class="f7-icons size-22">chat</i></span>
+                <div class="align-self-flex-end"  style="float:right;"><i class="f7-icons size-22">chat</i></div>
+                <div class="friendUser" style="width: 96vw;">${amigo}</div>
+                
                 
               </div>
             </div>

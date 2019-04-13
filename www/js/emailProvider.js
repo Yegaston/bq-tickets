@@ -7,8 +7,6 @@ class emailProvider {
 
   registro(email, password) {
     console.log("Hello world");
-    console.log(email)
-    console.log(password)
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function () {
@@ -27,8 +25,6 @@ class emailProvider {
 
   login(email, password) {
     console.log("Hola")
-    console.log(email)
-    console.log(password)
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function () {
         console.log("Usuario Logeado");
@@ -120,7 +116,6 @@ class emailProvider {
 
   asistirButton(eventoID, userID) {
     var db = firebase.firestore();
-    console.log(eventoID, userID)
 
     var docRef = db.collection("users").doc(userID);
 
@@ -141,8 +136,6 @@ class emailProvider {
             eventsArray.push(eventoID)
             return docRef.update({ Asistir: eventsArray })
               .then(function () {
-                console.log("Camp updated")
-                console.log(eventsArray)
                 $$('.open-toast-top').on('click', function () {
                   toastTop.open();
                 });
@@ -154,8 +147,6 @@ class emailProvider {
           } else {
             return docRef.update({ Asistir: [eventoID] })
               .then(function () {
-                console.log("Camp added")
-                console.log(eventoID)
 
                 $$('.open-toast-top').on('click', function () {
                   toastTop.open();
@@ -274,8 +265,6 @@ class emailProvider {
 
 
   pushUserData(name, age, tags) {
-    console.log(name, age)
-    console.log(tags)
 
     const user = {
       name: name,
@@ -312,10 +301,6 @@ class emailProvider {
 
     usersRef.doc(email).get().then(function (doc) {
       if (doc.exists) {
-        console.log(doc)
-
-        console.log(doc.data().name)
-        console.log(doc.data().age)
         $$('#cuentaName').text(doc.data().name);
         $$('#cuentaEmail').text(doc.id)
         return doc
@@ -330,7 +315,6 @@ class emailProvider {
 
   cuentaUserData() {
     var doc = emailProvider.getUserByEmail('messi@barcelona.com');
-    console.log(doc)
   }
 
 }
