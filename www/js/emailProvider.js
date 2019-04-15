@@ -6,6 +6,12 @@ class emailProvider {
   }
 
   registro(email, password) {
+    var registerErr = app.toast.create({
+      text: 'Register Error: Compruebe los datos ingresados',
+      closeButton: true,
+      closeButtonText: 'Cerrar',
+      closeButtonColor: 'red',
+    });
     console.log("Hello world");
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -15,16 +21,21 @@ class emailProvider {
         app.views.main.router.navigate({ name: 'register-done' });
       })
       .catch(function (error) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log("Usuario creado");
-        }
+
       });
+    registerErr.open();
   }
 
   login(email, password) {
     console.log("Hola")
+    var loginErrMessage = ''
+    var loginErrCode = ''
+    var loginErr = app.toast.create({
+      text: 'Usuario o clave erronea.',
+      closeButton: true,
+      closeButtonText: 'Cerrar',
+      closeButtonColor: 'red',
+    });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function () {
         console.log("Usuario Logeado");
@@ -32,11 +43,10 @@ class emailProvider {
         app.views.main.router.navigate({ name: 'index' });
       })
       .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        
         // ...
         console.log(error)
+        loginErr.open();
       });
   }
 
