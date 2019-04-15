@@ -136,9 +136,7 @@ class emailProvider {
             eventsArray.push(eventoID)
             return docRef.update({ Asistir: eventsArray })
               .then(function () {
-                $$('.open-toast-top').on('click', function () {
-                  toastTop.open();
-                });
+                toastTop.open();
               })
               .catch(function (err) {
                 console.log(err)
@@ -147,11 +145,7 @@ class emailProvider {
           } else {
             return docRef.update({ Asistir: [eventoID] })
               .then(function () {
-
-                $$('.open-toast-top').on('click', function () {
-                  toastTop.open();
-                });
-
+                toastTop.open();
               })
               .catch(function (err) {
                 console.log(err)
