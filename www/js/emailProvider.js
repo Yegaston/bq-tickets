@@ -6,6 +6,12 @@ class emailProvider {
   }
 
   registro(email, password) {
+    var registerErr = app.toast.create({
+      text: 'Register Error: Compruebe los datos ingresados',
+      closeButton: true,
+      closeButtonText: 'Cerrar',
+      closeButtonColor: 'red',
+    });
     console.log("Hello world");
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -15,12 +21,9 @@ class emailProvider {
         app.views.main.router.navigate({ name: 'register-done' });
       })
       .catch(function (error) {
-        if (error) {
-          console.log(error)
-        } else {
-          console.log("Usuario creado");
-        }
+
       });
+    registerErr.open();
   }
 
   login(email, password) {
