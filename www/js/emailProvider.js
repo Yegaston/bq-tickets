@@ -28,6 +28,14 @@ class emailProvider {
 
   login(email, password) {
     console.log("Hola")
+    var loginErrMessage = ''
+    var loginErrCode = ''
+    var loginErr = app.toast.create({
+      text: 'Usuario o clave erronea.',
+      closeButton: true,
+      closeButtonText: 'Cerrar',
+      closeButtonColor: 'red',
+    });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function () {
         console.log("Usuario Logeado");
@@ -35,11 +43,10 @@ class emailProvider {
         app.views.main.router.navigate({ name: 'index' });
       })
       .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        
         // ...
         console.log(error)
+        loginErr.open();
       });
   }
 
